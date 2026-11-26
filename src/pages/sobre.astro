@@ -10,7 +10,7 @@ import { business } from '../data/business';
 const page = business.pages.sobre;
 ---
 
-<BaseLayout title={page.title} description={page.description} schemaType="person">
+<BaseLayout title={page.title} description={page.description} schemaType="person" noindex={true}>
   <Nav />
   <main id="inicio">
     <Section>

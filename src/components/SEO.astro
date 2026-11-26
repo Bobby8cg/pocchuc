@@ -7,6 +7,7 @@ export interface Props {
   ogImage?: string;
   canonical?: string;
   keywords?: string;
+  noindex?: boolean;
 }
 
 const { brand, seo, credentials } = business;
@@ -17,7 +18,11 @@ const {
   ogImage = seo.defaultOgImage,
   canonical,
   keywords = seo.defaultKeywords.join(', '),
+  noindex = false,
 } = Astro.props;
+
+// Follow siempre se mantiene para que el crawler descubra el resto del sitio.
+const robots = noindex ? 'noindex, follow' : 'index, follow';
 
 const siteName = brand.name;
 const fullTitle = `${title} · ${siteName}`;
@@ -31,7 +36,7 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
 <meta name="author" content={credentials.founderName} />
-<meta name="robots" content="index, follow" />
+<meta name="robots" content={robots} />
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Open Graph -->

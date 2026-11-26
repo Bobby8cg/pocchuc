@@ -8,6 +8,7 @@ export interface Props {
   ogImage?: string;
   canonical?: string;
   keywords?: string;
+  noindex?: boolean;
   schemaType?:
     | 'organization'
     | 'travelagency'
@@ -24,6 +25,7 @@ const {
   ogImage,
   canonical,
   keywords,
+  noindex,
   schemaType = 'organization',
   schemaData,
 } = Astro.props;
@@ -61,6 +63,7 @@ const {
       ogImage={ogImage}
       canonical={canonical}
       keywords={keywords}
+      noindex={noindex}
     />
     <SchemaMarkup type={schemaType} data={schemaData} />
 
