@@ -28,6 +28,8 @@ export interface BusinessData {
     label: string;
     sublabel: string;
   }>;
+  process: Array<{ number: string; title: string; body: string }>;
+  aboutParagraphs: string[];
   services: Array<{
     slug: string; // "grupos-escolares" | "equipos-deportivos" | "ejecutivos"
     eyebrow: string;
@@ -94,6 +96,32 @@ export const business: BusinessData = {
     { value: "50+", label: "viajes armados", sublabel: "desde que empezamos" },
     { value: "2", label: "equipos recurrentes", sublabel: "que confían año con año" },
     { value: "0", label: "incidencias operativas", sublabel: "en todos los viajes" },
+  ],
+  process: [
+    {
+      number: "01",
+      title: "Nos cuentas",
+      body: "Una llamada de 30 minutos para entender destino, fechas, número de personas, presupuesto y no-negociables. Sin compromiso.",
+    },
+    {
+      number: "02",
+      title: "Te proponemos",
+      body: "Cotización estándar en 48 horas con 2-3 opciones de hospedaje, presupuesto desglosado y preview del hub digital. ¿Necesitas antes? Cotización express en 24 horas por un fee adicional de $500 MXN.",
+    },
+    {
+      number: "03",
+      title: "Confirmamos",
+      body: "Firma de propuesta, anticipo del 30%, y procedemos a reservas en firme con comprobantes.",
+    },
+    {
+      number: "04",
+      title: "Te acompañamos",
+      body: "Hub digital con todo el itinerario, documento de contingencias, y soporte vía WhatsApp durante el viaje.",
+    },
+  ],
+  aboutParagraphs: [
+    "Hay viajes que no eliges hacer, pero tienes que hacer sí o sí. Un torneo escolar fuera de la ciudad. Un ejecutivo que presenta en otra plaza. Una boda de prima a la que no puedes faltar. Esos viajes no son escape — son compromiso. Y cada hora que gastas armándolos es una hora que no le dedicas a lo que sí es tu trabajo.",
+    "Agencias Poc Chuc existe para resolverlos. Te entregamos el viaje completo listo para ejecutar: vuelos, hospedaje, traslados, actividades y un hub digital con todo lo que necesitas en la mano. Tú firmas y supervisas. Nosotros operamos.",
   ],
   services: [
     {

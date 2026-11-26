@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+import Heading from '../components/Heading.astro';
+import { business } from '../data/business';
+
+const page = business.pages['equipos-deportivos'];
+---
+
+<BaseLayout title={page.title} description={page.description}>
+  <Nav />
+  <main id="inicio">
+    <Section>
+      <Container>
+        <Heading as="h1" size="h1">Equipos deportivos</Heading>
+      </Container>
+    </Section>
+  </main>
+  <Footer />
+</BaseLayout>

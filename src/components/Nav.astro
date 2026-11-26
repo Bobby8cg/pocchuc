@@ -1,13 +1,25 @@
 ---
 import { business } from '../data/business';
 
-const links = [
-  { href: '/grupos-deportivos', label: 'Grupos deportivos' },
-  { href: '/ejecutivos', label: 'Ejecutivos' },
+// Primeros 3 links: derivados de business.services (label a partir del slug).
+const toLabel = (slug: string) => {
+  const words = slug.replace(/-/g, ' ');
+  return words.charAt(0).toUpperCase() + words.slice(1);
+};
+
+const serviceLinks = business.services.map((s) => ({
+  href: s.cta.href,
+  label: toLabel(s.slug),
+}));
+
+// Links fijos.
+const fixedLinks = [
   { href: '/como-trabajamos', label: 'Cómo trabajamos' },
   { href: '/casos', label: 'Casos' },
   { href: '/sobre', label: 'Sobre' },
 ];
+
+const links = [...serviceLinks, ...fixedLinks];
 ---
 
 <header class="sticky top-0 z-50 border-b border-divider-dark bg-surface-base-dark/90 backdrop-blur">

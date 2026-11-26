@@ -7,9 +7,6 @@ import Container from '../components/Container.astro';
 import Heading from '../components/Heading.astro';
 import { business } from '../data/business';
 
-// NOTA: business.pages no tiene clave "grupos-deportivos"; el modelo nuevo la divide
-// en "grupos-escolares" y "equipos-deportivos". Esta página (transitoria) consume la
-// entrada sucesora "grupos-escolares" hasta que se haga el rename de rutas.
 const page = business.pages['grupos-escolares'];
 ---
 
@@ -18,7 +15,7 @@ const page = business.pages['grupos-escolares'];
   <main id="inicio">
     <Section>
       <Container>
-        <Heading as="h1" size="h1">Grupos deportivos</Heading>
+        <Heading as="h1" size="h1">Grupos escolares</Heading>
       </Container>
     </Section>
   </main>

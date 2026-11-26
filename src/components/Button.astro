@@ -4,6 +4,8 @@ export interface Props {
   href?: string;
   size?: 'md' | 'lg';
   type?: 'button' | 'submit' | 'reset';
+  target?: string;
+  rel?: string;
   class?: string;
 }
 const {
@@ -11,6 +13,8 @@ const {
   href,
   size = 'md',
   type = 'button',
+  target,
+  rel,
   class: className = '',
 } = Astro.props;
 
@@ -34,7 +38,7 @@ const classes = [base, sizes[size], variants[variant], className];
 
 {
   href ? (
-    <a href={href} class:list={classes}>
+    <a href={href} target={target} rel={rel} class:list={classes}>
       <slot />
     </a>
   ) : (

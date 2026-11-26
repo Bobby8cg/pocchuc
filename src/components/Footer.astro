@@ -1,7 +1,7 @@
 ---
 import { business } from '../data/business';
 
-const { brand, credentials, contact } = business;
+const { brand, credentials, contact, services } = business;
 ---
 
 <footer class="border-t border-divider-dark bg-surface-base-dark text-ink-primary-dark">
@@ -15,13 +15,21 @@ const { brand, credentials, contact } = business;
       </p>
     </div>
 
-    <!-- Columna 2: Enlaces -->
+    <!-- Columna 2: Servicios -->
     <div class="flex flex-col gap-3">
-      <span class="text-overline uppercase text-ink-primary-dark/50">Navegación</span>
-      <nav class="flex flex-col gap-2 text-body-sm" aria-label="Pie de página">
-        <a href="/como-trabajamos" class="text-ink-primary-dark/80 hover:text-accent-primary">Servicios</a>
-        <a href="/sobre" class="text-ink-primary-dark/80 hover:text-accent-primary">Nosotros</a>
-        <a href="/contacto" class="text-ink-primary-dark/80 hover:text-accent-primary">Contacto</a>
+      <span class="text-overline uppercase text-ink-primary-dark/50">Servicios</span>
+      <nav aria-label="Servicios">
+        <ul class="flex flex-col gap-2 text-body-sm">
+          {
+            services.map((s) => (
+              <li>
+                <a href={s.cta.href} class="text-ink-primary-dark/80 hover:text-accent-primary">
+                  {s.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </nav>
     </div>
 

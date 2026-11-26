@@ -4,3 +4,10 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Redirect de URL legacy: /grupos-deportivos se renombró a /equipos-deportivos.
+[[redirects]]
+  from = "/grupos-deportivos"
+  to = "/equipos-deportivos"
+  status = 301
+  force = true
