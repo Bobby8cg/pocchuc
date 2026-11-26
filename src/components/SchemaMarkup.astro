@@ -1,0 +1,67 @@
+---
+export interface Props {
+  type?:
+    | 'organization'
+    | 'travelagency'
+    | 'service'
+    | 'faqpage'
+    | 'person'
+    | 'breadcrumb';
+  data?: Record<string, unknown>;
+}
+
+const { type = 'organization', data } = Astro.props;
+
+const BASE = 'https://pocchuc.mx';
+
+// Datos de organización compartidos entre Organization y TravelAgency
+const orgCore = {
+  name: 'Agencias Poc Chuc',
+  url: BASE,
+  logo: `${BASE}/logo.png`,
+  description:
+    'Agencia de viajes boutique mexicana especialista en viajes de deber: competencias deportivas, viajes de trabajo recurrentes, obligaciones familiares.',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Guadalajara',
+    addressRegion: 'Jalisco',
+    addressCountry: 'MX',
+  },
+  email: 'roberto@pocchuc.mx',
+  founder: {
+    '@type': 'Person',
+    name: 'Roberto Calderón Guillemot',
+  },
+};
+
+const defaults: Record<string, Record<string, unknown>> = {
+  organization: {
+    '@type': 'Organization',
+    ...orgCore,
+  },
+  travelagency: {
+    '@type': 'TravelAgency',
+    ...orgCore,
+    iataCode: '33520476',
+    areaServed: ['México', 'Estados Unidos', 'Canadá', 'Europa', 'Sureste Asiático'],
+  },
+  person: {
+    '@type': 'Person',
+    name: 'Roberto Calderón Guillemot',
+    jobTitle: 'Fundador',
+    worksFor: { '@type': 'Organization', name: 'Agencias Poc Chuc' },
+    url: BASE,
+  },
+  service: { '@type': 'Service' },
+  faqpage: { '@type': 'FAQPage' },
+  breadcrumb: { '@type': 'BreadcrumbList' },
+};
+
+const schema = {
+  '@context': 'https://schema.org',
+  ...(defaults[type] ?? defaults.organization),
+  ...(data ?? {}),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />

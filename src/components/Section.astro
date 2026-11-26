@@ -1,0 +1,18 @@
+---
+export interface Props {
+  variant?: 'default' | 'elevated' | 'inverse';
+  id?: string;
+  class?: string;
+}
+const { variant = 'default', id, class: className = '' } = Astro.props;
+
+const variants: Record<string, string> = {
+  default: 'bg-surface-base-dark text-ink-primary-dark',
+  elevated: 'bg-surface-elevated-dark text-ink-primary-dark',
+  inverse: 'bg-surface-base-light text-ink-primary-light',
+};
+---
+
+<section id={id} class:list={['py-16 md:py-24 lg:py-32', variants[variant], className]}>
+  <slot />
+</section>

@@ -1,0 +1,12 @@
+---
+export interface Props {
+  as?: 'span' | 'p';
+  class?: string;
+}
+const { as = 'span', class: className = '' } = Astro.props;
+const Tag = as;
+---
+
+<Tag class:list={['block text-caption uppercase text-accent-primary', className]}>
+  <slot />
+</Tag>

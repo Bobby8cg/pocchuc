@@ -2,12 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+import Heading from '../components/Heading.astro';
 ---
 
-<BaseLayout title="Casos — Agencias Poc Chuc">
+<BaseLayout
+  title="Casos reales de viajes que hemos armado"
+  description="Instituto de Ciencias, Lobos Rugby y más. Viajes reales con logística completa y hubs digitales personalizados."
+>
   <Nav />
-  <main class="mx-auto max-w-[1200px] px-6 py-12">
-    <h1 class="text-h1 text-ink-primary-dark">Casos</h1>
+  <main id="inicio">
+    <Section>
+      <Container>
+        <Heading as="h1" size="h1">Casos</Heading>
+      </Container>
+    </Section>
   </main>
   <Footer />
 </BaseLayout>

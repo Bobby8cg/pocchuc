@@ -2,12 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+import Heading from '../components/Heading.astro';
 ---
 
-<BaseLayout title="Cómo trabajamos — Agencias Poc Chuc">
+<BaseLayout
+  title="Nuestro proceso: cómo armamos cada viaje"
+  description="Un proceso probado en 4 fases: descubrimiento, propuesta, pre-viaje, durante y post. Cotización estándar 48h, express 24h por $500 MXN."
+>
   <Nav />
-  <main class="mx-auto max-w-[1200px] px-6 py-12">
-    <h1 class="text-h1 text-ink-primary-dark">Cómo trabajamos</h1>
+  <main id="inicio">
+    <Section>
+      <Container>
+        <Heading as="h1" size="h1">Cómo trabajamos</Heading>
+      </Container>
+    </Section>
   </main>
   <Footer />
 </BaseLayout>

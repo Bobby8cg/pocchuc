@@ -1,0 +1,46 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonical?: string;
+  keywords?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/og-default.png',
+  canonical,
+  keywords = 'agencia de viajes, viajes de deber, viajes deportivos, viajes de trabajo, logística de viajes, Guadalajara, grupos deportivos, viajes ejecutivos, Poc Chuc',
+} = Astro.props;
+
+const siteName = 'Agencias Poc Chuc';
+const fullTitle = `${title} · ${siteName}`;
+
+// Canonical y URL absolutas (Astro.site viene de astro.config `site`)
+const canonicalURL = canonical ?? new URL(Astro.url.pathname, Astro.site).href;
+const ogImageURL = new URL(ogImage, Astro.site).href;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content="Roberto Calderón Guillemot" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:locale" content="es_MX" />
+<meta property="og:site_name" content={siteName} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageURL} />

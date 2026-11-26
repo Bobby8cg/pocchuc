@@ -2,30 +2,275 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+import Button from '../components/Button.astro';
+import Heading from '../components/Heading.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import Card from '../components/Card.astro';
+
+// TODO(copy): los bloques marcados "DRAFT" usan copy on-brand provisional.
+// Reemplazar con el copy exacto del wireframe cuando esté disponible.
+
+const proceso = [
+  {
+    n: '01',
+    title: 'Descubrimiento',
+    body: 'Nos cuentas el viaje en un mensaje. Destino, fechas, cuántos van y qué no puede fallar. Nosotros preguntamos lo que tú no sabías que había que preguntar.', // DRAFT
+  },
+  {
+    n: '02',
+    title: 'Propuesta',
+    body: 'Armamos la propuesta completa con hospedaje, traslados y tiempos. Cotización estándar en 48 h, express en 24 h. Un solo documento, cero letra chica.', // DRAFT
+  },
+  {
+    n: '03',
+    title: 'Pre-viaje',
+    body: 'Confirmamos cada reserva, preparamos el hub digital del grupo y dejamos todo listo antes de que empaques. Tú recibes un itinerario que se entiende solo.', // DRAFT
+  },
+  {
+    n: '04',
+    title: 'Durante y post',
+    body: 'Soporte en tiempo real mientras viajan y cierre con facturación en orden al regreso. Si algo se mueve, lo resolvemos nosotros, no tú.', // DRAFT
+  },
+];
+
+const stats = [
+  { num: '50+', label: 'viajes armados', sub: 'desde que empezamos' },
+  { num: '2', label: 'equipos recurrentes', sub: 'que confían año con año' },
+  { num: '0', label: 'incidencias operativas', sub: 'en todos los viajes' },
+];
+
+const casos = [
+  {
+    title: 'Ciencias Torreón',
+    body: 'Equipo escolar a torneo nacional. Logística completa de 30+ personas con hub digital.', // DRAFT
+  },
+  {
+    title: 'Ciencias La Marquesa',
+    body: 'Salida de grupo con traslados coordinados y hospedaje a la medida del calendario.', // DRAFT
+  },
+  {
+    title: 'Cancún 7s',
+    body: 'Torneo de rugby seven. Viaje de competencia armado como reloj, del vuelo a la cancha.', // DRAFT
+  },
+];
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="Viajes bien armados para competencias, trabajo y compromisos"
+  description="Agencia de viajes mexicana especialista en viajes de deber: competencias deportivas, viajes de trabajo y compromisos familiares. Cotiza en 48 h, express en 24 h."
+  schemaType="travelagency"
+>
   <Nav />
 
   <main>
-    <section class="mx-auto flex max-w-[1200px] flex-col items-start gap-7 px-6 py-12">
-      <h1 class="max-w-4xl text-display-lg text-ink-primary-dark">
-        Viajar bien no es suerte. Depende de quién lo arme.
-      </h1>
+    <!-- 5.1 Hero -->
+    <Section id="inicio" class="flex min-h-screen items-center">
+      <Container>
+        <div class="grid items-center gap-8 md:grid-cols-12">
+          <!-- Símbolo placeholder (se sustituye por el logo real) -->
+          <div class="flex justify-center md:col-span-5 md:justify-start">
+            <div class="relative aspect-square w-[300px] max-w-full" aria-hidden="true">
+              <div class="absolute inset-0 rounded-full bg-accent-primary"></div>
+              <svg
+                class="absolute inset-0 m-auto h-1/3 w-1/3 text-surface-base-dark"
+                viewBox="0 0 100 100"
+                fill="currentColor"
+              >
+                <polygon points="50,18 88,84 12,84"></polygon>
+              </svg>
+            </div>
+          </div>
 
-      <p class="max-w-2xl text-body-lg text-ink-primary-dark/75">
-        Somos la agencia de viajes boutique para los viajes que no admiten errores:
-        competencias deportivas, viajes de trabajo recurrentes y obligaciones familiares.
-        El operador invisible que arma cada detalle para que tú solo te presentes.
-      </p>
+          <!-- Contenido -->
+          <div class="md:col-span-7">
+            <Heading as="h1" size="display-xl" class="font-bold leading-tight">
+              Viajar bien no es suerte.<br />Depende de quién lo arme.
+            </Heading>
+            <p class="mt-6 text-body-lg text-ink-primary-dark/60">
+              Armamos los viajes que no eliges pero tienes que hacer sí o sí —
+              competencias deportivas, viajes de trabajo, obligaciones familiares —
+              para que lleguen como reloj suizo.
+            </p>
+            <div class="mt-9 flex flex-col gap-4 sm:flex-row">
+              <Button variant="primary" href="/contacto">Cotiza tu viaje →</Button>
+              <Button variant="ghost" href="#como-trabajamos">Ver cómo trabajamos ↓</Button>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </Section>
 
-      <a
-        href="/contacto"
-        class="mt-2 rounded-md bg-accent-primary px-6 py-3 text-button text-surface-base-dark transition-colors hover:bg-accent-primary-hover"
-      >
-        Cotiza tu viaje →
-      </a>
-    </section>
+    <!-- 5.2 Cómo trabajamos -->
+    <Section id="como-trabajamos">
+      <Container>
+        <div class="max-w-3xl">
+          <Eyebrow>El proceso</Eyebrow>
+          <Heading as="h2" size="display-md" class="mt-4">
+            Un proceso probado. Cero improvisación.
+          </Heading>
+          <p class="mt-4 text-body-lg text-ink-primary-dark/70">
+            Así es como armamos cada viaje — desde el primer mensaje hasta el regreso
+            del grupo.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            proceso.map((p) => (
+              <Card>
+                <span class="block text-display-md text-accent-primary">{p.n}</span>
+                <Heading as="h3" size="h3" class="mt-4">
+                  {p.title}
+                </Heading>
+                <p class="mt-3 text-body-md text-ink-primary-dark/70">{p.body}</p>
+              </Card>
+            ))
+          }
+        </div>
+
+        <div class="mt-9">
+          <Button variant="ghost" href="/como-trabajamos">Ver el proceso completo →</Button>
+        </div>
+      </Container>
+    </Section>
+
+    <!-- 5.3 Stats bar -->
+    <Section variant="elevated">
+      <Container>
+        <div class="grid gap-12 text-center md:grid-cols-3">
+          {
+            stats.map((s) => (
+              <div>
+                <span class="block text-display-lg text-accent-primary">{s.num}</span>
+                <span class="mt-2 block text-body-md text-ink-primary-dark">{s.label}</span>
+                <span class="mt-1 block text-body-sm text-ink-primary-dark/40">{s.sub}</span>
+              </div>
+            ))
+          }
+        </div>
+        <p class="mt-12 text-center text-body-sm text-ink-primary-dark/40">
+          Actualizado al noviembre 2026.
+        </p>
+      </Container>
+    </Section>
+
+    <!-- 5.4 About editorial -->
+    <Section>
+      <Container>
+        <div class="grid gap-12 md:grid-cols-12">
+          <div class="md:col-span-5">
+            <Heading as="h2" size="display-md">
+              No todos los viajes son vacaciones.
+            </Heading>
+          </div>
+          <div class="space-y-6 md:col-span-7">
+            <!-- DRAFT: reemplazar con los 2 párrafos exactos del wireframe -->
+            <p class="text-body-lg text-ink-primary-dark/70">
+              Hay viajes que no se eligen: la competencia del equipo, la junta
+              ineludible, el compromiso familiar al otro lado del país. No buscan
+              escape, buscan que todo salga bien. Ahí es donde entramos nosotros.
+            </p>
+            <p class="text-body-lg text-ink-primary-dark/70">
+              Agencias Poc Chuc nació ayudando a amigos a mover grupos sin errores y
+              hoy es una agencia profesional certificada. Operamos en silencio, con
+              precisión de relojero, para que tú solo tengas que presentarte.
+            </p>
+            <Button variant="ghost" href="/sobre">Conoce más sobre nosotros →</Button>
+          </div>
+        </div>
+      </Container>
+    </Section>
+
+    <!-- 5.5 Servicios -->
+    <Section>
+      <Container>
+        <div class="max-w-3xl">
+          <Eyebrow>Servicios</Eyebrow>
+          <Heading as="h2" size="display-md" class="mt-4">
+            Dos productos. Un solo estándar.
+          </Heading>
+        </div>
+
+        <div class="mt-12 grid gap-6 md:grid-cols-2">
+          <Card variant="highlighted" href="/grupos-deportivos">
+            <Heading as="h3" size="h2">Grupos deportivos</Heading>
+            <p class="mt-4 text-body-lg text-ink-primary-dark/70">
+              Armamos el viaje completo del equipo: hospedaje, traslados, hub digital.
+              Opción de depósito directo de padres. Desde Guadalajara.
+            </p>
+            <span class="mt-6 inline-block text-button text-accent-primary">
+              Ver grupos deportivos →
+            </span>
+          </Card>
+
+          <Card href="/ejecutivos">
+            <Heading as="h3" size="h2">Ejecutivos</Heading>
+            <p class="mt-4 text-body-lg text-ink-primary-dark/70">
+              Resolvemos tus viajes de trabajo con un solo mensaje. Facturamos a tu
+              empresa o facturas individuales para reembolso. Respuesta &lt;4 h.
+            </p>
+            <span class="mt-6 inline-block text-button text-accent-primary">
+              Ver ejecutivos →
+            </span>
+          </Card>
+        </div>
+      </Container>
+    </Section>
+
+    <!-- 5.6 Casos destacados -->
+    <Section variant="elevated">
+      <Container>
+        <div class="max-w-3xl">
+          <Eyebrow>Casos</Eyebrow>
+          <Heading as="h2" size="display-md" class="mt-4">Lo que hemos armado.</Heading>
+          <p class="mt-4 text-body-lg text-ink-primary-dark/70">
+            Tres casos reales. Cada uno tiene su propio hub digital.
+          </p>
+        </div>
+
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          {
+            casos.map((c) => (
+              <Card>
+                <div
+                  class="aspect-video w-full rounded-md bg-divider-dark"
+                  role="img"
+                  aria-label={`Imagen del caso ${c.title} (pendiente)`}
+                />
+                <Heading as="h3" size="h3" class="mt-6">
+                  {c.title}
+                </Heading>
+                <p class="mt-3 text-body-md text-ink-primary-dark/70">{c.body}</p>
+              </Card>
+            ))
+          }
+        </div>
+
+        <div class="mt-9">
+          <Button variant="ghost" href="/casos">Ver todos los casos →</Button>
+        </div>
+      </Container>
+    </Section>
+
+    <!-- 5.7 CTA final -->
+    <Section variant="inverse">
+      <Container class="text-center">
+        <div class="mx-auto max-w-3xl">
+          <Heading as="h2" size="display-md">¿Tienes un viaje que armar?</Heading>
+          <p class="mt-6 text-body-lg text-ink-primary-light/70">
+            Cotización estándar en 48 h sin costo. ¿Necesitas antes? Express en 24 h por
+            $500 MXN adicionales al total.
+          </p>
+          <div class="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
+            <Button variant="primary" href="/contacto">Cotiza tu viaje →</Button>
+            <!-- TODO(contacto): reemplazar # con el enlace wa.me real cuando esté el número -->
+            <Button variant="ghost" href="#">O escríbenos por WhatsApp →</Button>
+          </div>
+        </div>
+      </Container>
+    </Section>
   </main>
 
   <Footer />

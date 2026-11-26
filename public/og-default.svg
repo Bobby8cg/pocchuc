@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Agencias Poc Chuc">
+  <rect width="1200" height="630" fill="#0A1F26"/>
+  <!-- Símbolo -->
+  <g transform="translate(120 235)">
+    <circle cx="80" cy="80" r="80" fill="#E8862B"/>
+    <polygon points="80,52 108,122 52,122" fill="#0A1F26"/>
+  </g>
+  <!-- Texto -->
+  <text x="340" y="300" font-family="Inter, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="#FAF8F5">Agencias Poc Chuc</text>
+  <text x="340" y="372" font-family="Inter, Helvetica, Arial, sans-serif" font-size="34" font-weight="400" fill="#E8862B">Viajar bien no es suerte. Depende de quién lo arme.</text>
+  <text x="340" y="430" font-family="Inter, Helvetica, Arial, sans-serif" font-size="24" font-weight="400" fill="#FAF8F5" opacity="0.6">Viajes de deber · Guadalajara, México</text>
+</svg>

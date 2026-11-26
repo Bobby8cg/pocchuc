@@ -1,0 +1,32 @@
+---
+export interface Props {
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span';
+  size?:
+    | 'display-xl'
+    | 'display-lg'
+    | 'display-md'
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4';
+  class?: string;
+}
+const { as = 'h2', size = 'h2', class: className = '' } = Astro.props;
+
+const Tag = as;
+
+// Literal class strings so Tailwind's content scanner always generates them.
+const sizeClasses: Record<string, string> = {
+  'display-xl': 'text-display-xl',
+  'display-lg': 'text-display-lg',
+  'display-md': 'text-display-md',
+  h1: 'text-h1',
+  h2: 'text-h2',
+  h3: 'text-h3',
+  h4: 'text-h4',
+};
+---
+
+<Tag class:list={[sizeClasses[size], className]}>
+  <slot />
+</Tag>

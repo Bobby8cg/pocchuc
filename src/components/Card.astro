@@ -1,0 +1,34 @@
+---
+export interface Props {
+  variant?: 'default' | 'highlighted';
+  href?: string;
+  class?: string;
+}
+const { variant = 'default', href, class: className = '' } = Astro.props;
+
+const base =
+  'block bg-surface-elevated-dark p-8 rounded-lg transition-all duration-200 hover:-translate-y-1';
+
+const variants: Record<string, string> = {
+  default: 'border border-divider-dark',
+  highlighted: 'border-2 border-accent-primary',
+};
+
+const interactive = href
+  ? 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base-dark'
+  : '';
+
+const classes = [base, variants[variant], interactive, className];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes}>
+      <slot />
+    </a>
+  ) : (
+    <div class:list={classes}>
+      <slot />
+    </div>
+  )
+}

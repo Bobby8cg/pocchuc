@@ -1,12 +1,31 @@
 ---
+import SEO from '../components/SEO.astro';
+import SchemaMarkup from '../components/SchemaMarkup.astro';
+
 export interface Props {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
+  ogImage?: string;
+  canonical?: string;
+  keywords?: string;
+  schemaType?:
+    | 'organization'
+    | 'travelagency'
+    | 'service'
+    | 'faqpage'
+    | 'person'
+    | 'breadcrumb';
+  schemaData?: Record<string, unknown>;
 }
 
 const {
-  title = 'Agencias Poc Chuc — Viajar bien no es suerte. Depende de quién lo arme.',
-  description = 'Agencia de viajes boutique especialista en viajes de deber: competencias deportivas, viajes de trabajo recurrentes y obligaciones familiares. Viajar bien no es suerte. Depende de quién lo arme.',
+  title,
+  description,
+  ogImage,
+  canonical,
+  keywords,
+  schemaType = 'organization',
+  schemaData,
 } = Astro.props;
 ---
 
@@ -15,27 +34,49 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0A1F26" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <!-- Favicon (placeholder hasta tener el favicon real del logo) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:locale" content="es_MX" />
-
-    <!-- Google Fonts: Inter 300–700 -->
+    <!-- Fonts: Inter 300–700 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    />
+
+    <!-- SEO meta + structured data -->
+    <SEO
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      canonical={canonical}
+      keywords={keywords}
+    />
+    <SchemaMarkup type={schemaType} data={schemaData} />
+
+    <!-- TODO GA4: insertar el script de Google Analytics cuando esté la cuenta.
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    -->
   </head>
   <body>
+    <!-- Skip link para accesibilidad -->
+    <a
+      href="#inicio"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-accent-primary focus:px-4 focus:py-2 focus:text-button focus:text-surface-base-dark"
+    >
+      Saltar al contenido
+    </a>
+
     <slot />
 
     <style is:global>
@@ -63,6 +104,15 @@ const {
         font-family: 'Inter', system-ui, sans-serif;
         margin: 0;
         min-height: 100vh;
+      }
+      /* Focus visible global (accent-primary) para accesibilidad */
+      :where(a, button, input, textarea, select):focus-visible {
+        outline: 2px solid #e8862b;
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+      html {
+        scroll-behavior: smooth;
       }
     </style>
   </body>
