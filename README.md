@@ -4,8 +4,7 @@ Sitio oficial de **Agencias Poc Chuc**, agencia de viajes boutique mexicana espe
 en *viajes de deber*: competencias deportivas, viajes de trabajo recurrentes y
 obligaciones familiares.
 
-> **Precisión suiza. Carácter mexicano.**
-> Viajar bien no es suerte. Depende de quién lo arme.
+> **Viajar bien no es suerte. Depende de quién lo arme.**
 
 Dominio: **[pocchuc.mx](https://pocchuc.mx)**
 
