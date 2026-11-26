@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout>
+  <Nav />
+
+  <main>
+    <section class="mx-auto flex max-w-[1200px] flex-col items-start gap-7 px-6 py-12">
+      <span class="text-overline uppercase text-accent-primary">
+        Precisión suiza. Carácter mexicano.
+      </span>
+
+      <h1 class="max-w-4xl text-display-lg text-ink-primary-dark">
+        Viajar bien no es suerte. Depende de quién lo arme.
+      </h1>
+
+      <p class="max-w-2xl text-body-lg text-ink-primary-dark/75">
+        Somos la agencia de viajes boutique para los viajes que no admiten errores:
+        competencias deportivas, viajes de trabajo recurrentes y obligaciones familiares.
+        El operador invisible que arma cada detalle para que tú solo te presentes.
+      </p>
+
+      <a
+        href="/contacto"
+        class="mt-2 rounded-md bg-accent-primary px-6 py-3 text-button text-surface-base-dark transition-colors hover:bg-accent-primary-hover"
+      >
+        Cotiza tu viaje →
+      </a>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
