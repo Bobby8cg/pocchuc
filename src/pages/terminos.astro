@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Section from '../components/Section.astro';
+import Container from '../components/Container.astro';
+import Heading from '../components/Heading.astro';
+import { business } from '../data/business';
+
+const page = business.pages.terminos;
+---
+
+<BaseLayout title={page.title} description={page.description}>
+  <Nav />
+  <main id="inicio">
+    <Section>
+      <Container>
+        <Heading as="h1" size="h1">Términos y condiciones</Heading>
+        <p class="mt-6 max-w-2xl text-body-lg text-ink-primary-dark/70">
+          Estamos preparando nuestros términos y condiciones. Mientras tanto, si tienes
+          dudas, escríbenos a
+          <a
+            href={`mailto:${business.contact.email}`}
+            class="text-accent-primary hover:underline"
+          >
+            {business.contact.email}</a
+          >.
+        </p>
+      </Container>
+    </Section>
+  </main>
+  <Footer />
+</BaseLayout>

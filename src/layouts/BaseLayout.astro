@@ -113,6 +113,19 @@ const {
       }
       html {
         scroll-behavior: smooth;
+        /* Altura aproximada del nav sticky, usada como offset de scroll. */
+        --nav-height: 5rem;
+      }
+      /* El nav sticky no debe tapar el heading de la sección destino. */
+      :target,
+      section[id] {
+        scroll-margin-top: var(--nav-height);
+      }
+      /* Respeta la preferencia de movimiento reducido. */
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
       }
     </style>
   </body>

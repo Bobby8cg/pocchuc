@@ -235,5 +235,13 @@ export const business: BusinessData = {
       title: "Cotiza tu viaje · Contacto",
       description: "Cuéntanos tu viaje y te contestamos en menos de 4 horas. Formulario, WhatsApp o agenda una llamada.",
     },
+    "aviso-de-privacidad": {
+      title: "Aviso de privacidad",
+      description: "Aviso de privacidad de Agencias Poc Chuc.",
+    },
+    terminos: {
+      title: "Términos y condiciones",
+      description: "Términos y condiciones de Agencias Poc Chuc.",
+    },
   },
 };

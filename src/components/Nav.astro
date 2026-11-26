@@ -69,40 +69,112 @@ const links = [...serviceLinks, ...fixedLinks];
       </svg>
     </button>
   </nav>
+</header>
 
-  <!-- Menú mobile -->
-  <div id="mobile-menu" class="hidden border-t border-divider-dark px-6 pb-6 pt-2 md:hidden">
-    <ul class="flex flex-col gap-1">
+<!-- Menú mobile: overlay full-screen.
+     Va FUERA del <header> a propósito: el header tiene backdrop-blur
+     (backdrop-filter), lo que lo convierte en bloque contenedor de los
+     descendientes position:fixed y recortaría el overlay. -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-[60] hidden flex-col bg-surface-base-dark md:hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Menú de navegación"
+  >
+    <div class="flex items-center justify-between border-b border-divider-dark px-6 py-4">
+      <span class="text-h4 font-bold tracking-tight text-ink-primary-dark">{business.brand.name}</span>
+      <button
+        id="nav-close"
+        type="button"
+        class="inline-flex items-center justify-center rounded-md p-2 text-ink-primary-dark"
+        aria-label="Cerrar menú"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <nav class="flex flex-1 flex-col gap-1 overflow-y-auto px-6 py-6" aria-label="Navegación móvil">
       {
         links.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class="block rounded-md py-2 text-body-md text-ink-primary-dark/90 hover:text-accent-primary"
-            >
-              {link.label}
-            </a>
-          </li>
+          <a
+            href={link.href}
+            class="block rounded-md py-3 text-h4 text-ink-primary-dark/90 hover:text-accent-primary"
+          >
+            {link.label}
+          </a>
         ))
       }
-      <li class="pt-2">
-        <a
-          href="/contacto"
-          class="block rounded-md bg-accent-primary px-4 py-3 text-center text-button text-surface-base-dark hover:bg-accent-primary-hover"
-        >
-          Cotiza tu viaje →
-        </a>
-      </li>
-    </ul>
-  </div>
-</header>
+      <a
+        href="/contacto"
+        class="mt-4 block rounded-md bg-accent-primary px-4 py-3 text-center text-button text-surface-base-dark hover:bg-accent-primary-hover"
+      >
+        Cotiza tu viaje →
+      </a>
+    </nav>
+</div>
 
 <script>
   const toggle = document.getElementById('nav-toggle');
   const menu = document.getElementById('mobile-menu');
-  toggle?.addEventListener('click', () => {
-    const isOpen = menu?.classList.toggle('hidden') === false;
-    toggle.setAttribute('aria-expanded', String(isOpen));
-    toggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
-  });
+  const closeBtn = document.getElementById('nav-close');
+
+  if (toggle && menu) {
+    const focusable = () =>
+      Array.from(
+        menu.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'),
+      );
+
+    const openMenu = () => {
+      menu.classList.remove('hidden');
+      menu.classList.add('flex');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Cerrar menú');
+      document.body.style.overflow = 'hidden';
+      (closeBtn ?? focusable()[0])?.focus();
+    };
+
+    const closeMenu = () => {
+      menu.classList.add('hidden');
+      menu.classList.remove('flex');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Abrir menú');
+      document.body.style.overflow = '';
+      toggle.focus();
+    };
+
+    toggle.addEventListener('click', () =>
+      menu.classList.contains('hidden') ? openMenu() : closeMenu(),
+    );
+    closeBtn?.addEventListener('click', closeMenu);
+
+    // Cerrar el menú al clickear cualquier link.
+    menu.querySelectorAll('a[href]').forEach((link) =>
+      link.addEventListener('click', closeMenu),
+    );
+
+    // Escape cierra; Tab queda atrapado dentro del overlay (focus trap).
+    document.addEventListener('keydown', (event) => {
+      if (menu.classList.contains('hidden')) return;
+      if (event.key === 'Escape') {
+        closeMenu();
+        return;
+      }
+      if (event.key === 'Tab') {
+        const items = focusable();
+        if (items.length === 0) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
+  }
 </script>
