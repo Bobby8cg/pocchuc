@@ -5,12 +5,12 @@ import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 import Container from '../components/Container.astro';
 import Heading from '../components/Heading.astro';
+import { business } from '../data/business';
+
+const page = business.pages.casos;
 ---
 
-<BaseLayout
-  title="Casos reales de viajes que hemos armado"
-  description="Instituto de Ciencias, Lobos Rugby y más. Viajes reales con logística completa y hubs digitales personalizados."
->
+<BaseLayout title={page.title} description={page.description}>
   <Nav />
   <main id="inicio">
     <Section>

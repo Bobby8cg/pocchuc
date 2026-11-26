@@ -1,4 +1,6 @@
 ---
+import { business } from '../data/business';
+
 export interface Props {
   title: string;
   description: string;
@@ -7,15 +9,17 @@ export interface Props {
   keywords?: string;
 }
 
+const { brand, seo, credentials } = business;
+
 const {
   title,
   description,
-  ogImage = '/og-default.png',
+  ogImage = seo.defaultOgImage,
   canonical,
-  keywords = 'agencia de viajes, viajes de deber, viajes deportivos, viajes de trabajo, logística de viajes, Guadalajara, grupos deportivos, viajes ejecutivos, Poc Chuc',
+  keywords = seo.defaultKeywords.join(', '),
 } = Astro.props;
 
-const siteName = 'Agencias Poc Chuc';
+const siteName = brand.name;
 const fullTitle = `${title} · ${siteName}`;
 
 // Canonical y URL absolutas (Astro.site viene de astro.config `site`)
@@ -26,7 +30,7 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
-<meta name="author" content="Roberto Calderón Guillemot" />
+<meta name="author" content={credentials.founderName} />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href={canonicalURL} />
 
@@ -36,7 +40,7 @@ const ogImageURL = new URL(ogImage, Astro.site).href;
 <meta property="og:type" content="website" />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:image" content={ogImageURL} />
-<meta property="og:locale" content="es_MX" />
+<meta property="og:locale" content={seo.siteLocale} />
 <meta property="og:site_name" content={siteName} />
 
 <!-- Twitter -->

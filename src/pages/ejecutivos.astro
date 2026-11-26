@@ -5,12 +5,12 @@ import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 import Container from '../components/Container.astro';
 import Heading from '../components/Heading.astro';
+import { business } from '../data/business';
+
+const page = business.pages.ejecutivos;
 ---
 
-<BaseLayout
-  title="Viajes de trabajo para ejecutivos que viajan mucho"
-  description="Resolvemos tus viajes de trabajo con un solo mensaje. Facturamos a tu empresa o facturas individuales para reembolso. Respuesta <4h."
->
+<BaseLayout title={page.title} description={page.description}>
   <Nav />
   <main id="inicio">
     <Section>

@@ -5,12 +5,15 @@ import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 import Container from '../components/Container.astro';
 import Heading from '../components/Heading.astro';
+import { business } from '../data/business';
+
+// NOTA: business.pages no tiene clave "grupos-deportivos"; el modelo nuevo la divide
+// en "grupos-escolares" y "equipos-deportivos". Esta página (transitoria) consume la
+// entrada sucesora "grupos-escolares" hasta que se haga el rename de rutas.
+const page = business.pages['grupos-escolares'];
 ---
 
-<BaseLayout
-  title="Viajes para equipos escolares y grupos deportivos"
-  description="Armamos el viaje completo del equipo: hospedaje, traslados, hub digital. Opción de depósito directo de padres. Desde Guadalajara."
->
+<BaseLayout title={page.title} description={page.description}>
   <Nav />
   <main id="inicio">
     <Section>

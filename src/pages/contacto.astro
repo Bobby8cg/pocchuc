@@ -5,12 +5,12 @@ import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 import Container from '../components/Container.astro';
 import Heading from '../components/Heading.astro';
+import { business } from '../data/business';
+
+const page = business.pages.contacto;
 ---
 
-<BaseLayout
-  title="Cotiza tu viaje · Contacto"
-  description="Cuéntanos tu viaje y te contestamos en menos de 4 horas. Formulario, WhatsApp o agenda una llamada."
->
+<BaseLayout title={page.title} description={page.description}>
   <Nav />
   <main id="inicio">
     <Section>

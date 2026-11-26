@@ -1,16 +1,17 @@
 ---
-const year = 2026;
+import { business } from '../data/business';
+
+const { brand, credentials, contact } = business;
 ---
 
 <footer class="border-t border-divider-dark bg-surface-base-dark text-ink-primary-dark">
   <div class="mx-auto grid max-w-[1200px] gap-9 px-6 py-11 md:grid-cols-3">
     <!-- Columna 1: Marca -->
     <div class="flex flex-col gap-3">
-      <span class="text-h4 font-bold tracking-tight">Agencias Poc Chuc</span>
-      <p class="text-body-sm font-medium text-accent-primary">Viajar bien no es suerte. Depende de quién lo arme.</p>
+      <span class="text-h4 font-bold tracking-tight">{brand.name}</span>
+      <p class="text-body-sm font-medium text-accent-primary">{brand.tagline}</p>
       <p class="max-w-xs text-body-sm text-ink-primary-dark/70">
-        Agencia de viajes boutique especialista en viajes de deber: competencias deportivas, viajes
-        de trabajo recurrentes y obligaciones familiares.
+        {brand.description}
       </p>
     </div>
 
@@ -32,13 +33,13 @@ const year = 2026;
         <a href="/terminos" class="text-ink-primary-dark/80 hover:text-accent-primary">Términos</a>
       </nav>
       <p class="text-body-sm text-ink-primary-dark/60">
-        Afiliados a Fora Travel · Agentes certificados IATA #33520476
+        Afiliados a {credentials.hostAgency} · Agentes certificados IATA #{credentials.iataNumber}
       </p>
       <a
-        href="mailto:roberto@pocchuc.mx"
+        href={`mailto:${contact.email}`}
         class="text-body-sm text-ink-primary-dark/80 hover:text-accent-primary"
       >
-        roberto@pocchuc.mx
+        {contact.email}
       </a>
     </div>
   </div>
@@ -46,7 +47,7 @@ const year = 2026;
   <div class="border-t border-divider-dark">
     <div class="mx-auto max-w-[1200px] px-6 py-6">
       <p class="text-caption uppercase text-ink-primary-dark/50">
-        © {year} Agencias Poc Chuc
+        © {credentials.foundedYear} {brand.name}
       </p>
     </div>
   </div>

@@ -5,13 +5,12 @@ import Footer from '../components/Footer.astro';
 import Section from '../components/Section.astro';
 import Container from '../components/Container.astro';
 import Heading from '../components/Heading.astro';
+import { business } from '../data/business';
+
+const page = business.pages.sobre;
 ---
 
-<BaseLayout
-  title="Sobre Agencias Poc Chuc y Roberto Calderón"
-  description="Nacimos ayudando a amigos a viajar bien. Hoy agencia profesional certificada IATA #33520476 vía Fora Travel. Desde Guadalajara."
-  schemaType="person"
->
+<BaseLayout title={page.title} description={page.description} schemaType="person">
   <Nav />
   <main id="inicio">
     <Section>

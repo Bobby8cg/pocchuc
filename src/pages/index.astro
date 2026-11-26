@@ -8,8 +8,12 @@ import Button from '../components/Button.astro';
 import Heading from '../components/Heading.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Card from '../components/Card.astro';
+import { business } from '../data/business';
 
-// TODO(copy): los bloques marcados "DRAFT" usan copy on-brand provisional.
+const { brand, pages, contact, stats, cases } = business;
+
+// TODO(copy): el bloque "proceso" usa copy on-brand provisional (DRAFT).
+// No está en business.ts (no es parte del modelo de datos central todavía).
 // Reemplazar con el copy exacto del wireframe cuando esté disponible.
 
 const proceso = [
@@ -35,31 +39,12 @@ const proceso = [
   },
 ];
 
-const stats = [
-  { num: '50+', label: 'viajes armados', sub: 'desde que empezamos' },
-  { num: '2', label: 'equipos recurrentes', sub: 'que confían año con año' },
-  { num: '0', label: 'incidencias operativas', sub: 'en todos los viajes' },
-];
-
-const casos = [
-  {
-    title: 'Ciencias Torreón',
-    body: 'Equipo escolar a torneo nacional. Logística completa de 30+ personas con hub digital.', // DRAFT
-  },
-  {
-    title: 'Ciencias La Marquesa',
-    body: 'Salida de grupo con traslados coordinados y hospedaje a la medida del calendario.', // DRAFT
-  },
-  {
-    title: 'Cancún 7s',
-    body: 'Torneo de rugby seven. Viaje de competencia armado como reloj, del vuelo a la cancha.', // DRAFT
-  },
-];
+// stats y cases vienen de business.ts (fuente única de verdad).
 ---
 
 <BaseLayout
-  title="Viajes bien armados para competencias, trabajo y compromisos"
-  description="Agencia de viajes mexicana especialista en viajes de deber: competencias deportivas, viajes de trabajo y compromisos familiares. Cotiza en 48 h, express en 24 h."
+  title={pages.home.title}
+  description={pages.home.description}
   schemaType="travelagency"
 >
   <Nav />
@@ -86,12 +71,10 @@ const casos = [
           <!-- Contenido -->
           <div class="md:col-span-7">
             <Heading as="h1" size="display-xl" class="font-bold leading-tight">
-              Viajar bien no es suerte.<br />Depende de quién lo arme.
+              <Fragment set:html={brand.tagline.replace('. ', '.<br />')} />
             </Heading>
             <p class="mt-6 text-body-lg text-ink-primary-dark/60">
-              Armamos los viajes que no eliges pero tienes que hacer sí o sí —
-              competencias deportivas, viajes de trabajo, obligaciones familiares —
-              para que lleguen como reloj suizo.
+              {brand.manifesto}
             </p>
             <div class="mt-9 flex flex-col gap-4 sm:flex-row">
               <Button variant="primary" href="/contacto">Cotiza tu viaje →</Button>
@@ -143,9 +126,9 @@ const casos = [
           {
             stats.map((s) => (
               <div>
-                <span class="block text-display-lg text-accent-primary">{s.num}</span>
+                <span class="block text-display-lg text-accent-primary">{s.value}</span>
                 <span class="mt-2 block text-body-md text-ink-primary-dark">{s.label}</span>
-                <span class="mt-1 block text-body-sm text-ink-primary-dark/40">{s.sub}</span>
+                <span class="mt-1 block text-body-sm text-ink-primary-dark/40">{s.sublabel}</span>
               </div>
             ))
           }
@@ -184,6 +167,10 @@ const casos = [
     </Section>
 
     <!-- 5.5 Servicios -->
+    <!-- NOTA: business.services define 3 servicios con rutas nuevas (/grupos-escolares,
+         /equipos-deportivos) que aún no existen. Para no romper el layout (2→3 cards)
+         ni crear enlaces 404, esta sección se mantiene con las 2 cards actuales y se
+         cableará a business.services junto con el rename de páginas. -->
     <Section>
       <Container>
         <div class="max-w-3xl">
@@ -232,17 +219,17 @@ const casos = [
 
         <div class="mt-12 grid gap-6 md:grid-cols-3">
           {
-            casos.map((c) => (
+            cases.map((c) => (
               <Card>
                 <div
                   class="aspect-video w-full rounded-md bg-divider-dark"
                   role="img"
-                  aria-label={`Imagen del caso ${c.title} (pendiente)`}
+                  aria-label={c.imageAlt ?? `Imagen del caso ${c.title} (pendiente)`}
                 />
                 <Heading as="h3" size="h3" class="mt-6">
                   {c.title}
                 </Heading>
-                <p class="mt-3 text-body-md text-ink-primary-dark/70">{c.body}</p>
+                <p class="mt-3 text-body-md text-ink-primary-dark/70">{c.highlights}</p>
               </Card>
             ))
           }
@@ -265,8 +252,7 @@ const casos = [
           </p>
           <div class="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
             <Button variant="primary" href="/contacto">Cotiza tu viaje →</Button>
-            <!-- TODO(contacto): reemplazar # con el enlace wa.me real cuando esté el número -->
-            <Button variant="ghost" href="#">O escríbenos por WhatsApp →</Button>
+            <Button variant="ghost" href={contact.whatsappUrl}>O escríbenos por WhatsApp →</Button>
           </div>
         </div>
       </Container>

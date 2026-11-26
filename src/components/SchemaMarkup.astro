@@ -1,4 +1,6 @@
 ---
+import { business } from '../data/business';
+
 export interface Props {
   type?:
     | 'organization'
@@ -12,25 +14,24 @@ export interface Props {
 
 const { type = 'organization', data } = Astro.props;
 
-const BASE = 'https://pocchuc.mx';
+const { brand, credentials, contact } = business;
 
 // Datos de organización compartidos entre Organization y TravelAgency
 const orgCore = {
-  name: 'Agencias Poc Chuc',
-  url: BASE,
-  logo: `${BASE}/logo.png`,
-  description:
-    'Agencia de viajes boutique mexicana especialista en viajes de deber: competencias deportivas, viajes de trabajo recurrentes, obligaciones familiares.',
+  name: brand.name,
+  url: brand.url,
+  logo: `${brand.url}/logo.png`,
+  description: brand.description,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Guadalajara',
-    addressRegion: 'Jalisco',
-    addressCountry: 'MX',
+    addressLocality: credentials.city,
+    addressRegion: credentials.region,
+    addressCountry: credentials.country,
   },
-  email: 'roberto@pocchuc.mx',
+  email: contact.email,
   founder: {
     '@type': 'Person',
-    name: 'Roberto Calderón Guillemot',
+    name: credentials.founderName,
   },
 };
 
@@ -42,15 +43,16 @@ const defaults: Record<string, Record<string, unknown>> = {
   travelagency: {
     '@type': 'TravelAgency',
     ...orgCore,
-    iataCode: '33520476',
+    iataCode: credentials.iataNumber,
+    // areaServed no está en business.ts (no es parte del modelo de datos central)
     areaServed: ['México', 'Estados Unidos', 'Canadá', 'Europa', 'Sureste Asiático'],
   },
   person: {
     '@type': 'Person',
-    name: 'Roberto Calderón Guillemot',
+    name: credentials.founderName,
     jobTitle: 'Fundador',
-    worksFor: { '@type': 'Organization', name: 'Agencias Poc Chuc' },
-    url: BASE,
+    worksFor: { '@type': 'Organization', name: brand.name },
+    url: brand.url,
   },
   service: { '@type': 'Service' },
   faqpage: { '@type': 'FAQPage' },
